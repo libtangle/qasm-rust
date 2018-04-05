@@ -1,0 +1,14 @@
+[package]
+name = "qasm"
+version = "0.1.0"
+authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
+build = "build.rs"
+description = "A OPENQASM 2.0; Parser"
+
+[dependencies]
+lalrpop-util = "0.15.1"
+regex = "0.2.0"
+
+# Add a build-time dependency on the lalrpop library:
+[build-dependencies]
+lalrpop = "0.15.1"

@@ -1,0 +1,27 @@
+use std::str::FromStr;
+use ast::{Expr, Program};
+
+grammar;
+
+pub Program: Program = {
+  <v:Version> <e:Expr*> => Program {
+    version: v,
+    body: e
+  }
+};
+
+Expr: Expr = {
+  QReg, CReg
+};
+
+// Version
+Version: f32 = "OPENQASM" <Real> ";";
+
+// Register Initializations;
+QReg: Expr = "qreg" <a:Id> "[" <i:Int> "]" ";" => Expr::QReg(a, i);
+CReg: Expr = "creg" <a:Id> "[" <i:Int> "]" ";" => Expr::CReg(a, i);
+
+// Literals / Base Expressions
+Id: String = r"[a-z][A-Za-z0-9_]*" => <>.into();
+Int: i32 = r"[0-9]+" => i32::from_str(<>).unwrap();
+Real: f32 = r"[-+]?[0-9]*\.[0-9]+" => f32::from_str(<>).unwrap();
