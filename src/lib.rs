@@ -8,8 +8,8 @@
 //! Call the parser with some source code
 //! 
 //! ```rust
-//! # extern crate qasm
-//! qasm.parse(r#"
+//! # extern crate qasm;
+//! qasm::parse(r#"
 //! OPENQASM 2.0; 
 //! qreg register[3];
 //!"#);
@@ -27,7 +27,7 @@ use regex::Regex;
 ///
 /// ## Usage
 /// ```rust
-/// # extern crate qasm
+/// # extern crate qasm;
 /// qasm::parse(r#"
 /// OPENQASM 2.0; 
 /// qreg register[3];
