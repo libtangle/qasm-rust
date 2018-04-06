@@ -3,7 +3,6 @@ use token::Token;
 
 use std::str::Chars;
 use std::iter::Peekable;
-use regex::Regex;
 
 pub struct Lexer<'a> {
     input: Peekable<Chars<'a>>,
@@ -37,13 +36,6 @@ impl<'a> Lexer<'a> {
                 break;
             }
             self.read_char();
-        }
-    }
-
-    fn peek_is_letter(&mut self) -> bool {
-        match self.peek_char() {
-            Some(&ch) => is_letter(ch),
-            None => false,
         }
     }
 
