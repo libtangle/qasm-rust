@@ -111,14 +111,13 @@ impl<'a> Lexer<'a> {
                     token::lookup_ident(&literal)
                 } else if ch.is_numeric() {
                     let num_str = self.read_number(ch);
-                    let num = num_str.parse::<f32>().unwrap();
-
-                    return if num.ceil() == num {
-                        // Num is an integer
-                        Token::NNInteger(num as i32)
-                    } else {
+                    return if num_str.contains(".") {
+                        let num = num_str.parse::<f32>().unwrap();
                         Token::Real(num)
-                    };
+                    } else {
+                       let num = num_str.parse::<i32>().unwrap();
+                       Token::NNInteger(num)
+                    }
                 } else {
                     Token::Illegal
                 }
