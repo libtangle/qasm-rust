@@ -9,6 +9,9 @@ description = "A OPENQASM 2.0; Parser"
 lalrpop-util = "0.15.1"
 regex = "0.2.0"
 
-# Add a build-time dependency on the lalrpop library:
 [build-dependencies]
 lalrpop = "0.15.1"
+
+[[bin]]
+name = "sample"
+path = "examples/sample.rs"
