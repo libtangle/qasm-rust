@@ -5,6 +5,8 @@ authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
 description = "A OPENQASM 2.0 Parser"
 
 [dependencies]
+regex = "0.2"
+
 [[bin]]
 name = "lex"
 path = "examples/lex_repl.rs"

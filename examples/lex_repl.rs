@@ -1,5 +1,5 @@
 extern crate qasm;
-use qasm::{lexer, token};
+use qasm::{lexer, token, process};
 
 use std::io::{self, BufRead, Write};
 use token::Token;
@@ -16,6 +16,7 @@ fn main() {
 
         let mut line = String::new();
         stdin.lock().read_line(&mut line).expect("Error reading from stdin");
+        line = process(&mut line);
         let mut lexer = Lexer::new(&mut line);
 
         loop {

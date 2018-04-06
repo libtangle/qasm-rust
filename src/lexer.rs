@@ -3,6 +3,7 @@ use token::Token;
 
 use std::str::Chars;
 use std::iter::Peekable;
+use regex::Regex;
 
 pub struct Lexer<'a> {
     input: Peekable<Chars<'a>>,
@@ -46,11 +47,18 @@ impl<'a> Lexer<'a> {
         }
     }
 
+    fn peek_is_alphanumeric(&mut self) -> bool {
+        match self.peek_char() {
+            Some(&ch) => is_alphanumeric(ch),
+            None => false,
+        }
+    }
+
     fn read_identifier(&mut self, first: char) -> String {
         let mut ident = String::new();
         ident.push(first);
 
-        while self.peek_is_letter() {
+        while self.peek_is_alphanumeric() {
             ident.push(self.read_char().unwrap());
         }
 
@@ -131,6 +139,9 @@ impl<'a> Lexer<'a> {
 
 fn is_letter(ch: char) -> bool {
     ch.is_alphabetic() || ch == '_'
+}
+fn is_alphanumeric(ch: char) -> bool {
+    ch.is_alphanumeric() || ch == '_'
 }
 
 #[test]
