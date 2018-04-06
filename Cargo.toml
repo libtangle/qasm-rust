@@ -2,16 +2,9 @@
 name = "qasm"
 version = "0.1.0"
 authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
-build = "build.rs"
-description = "A OPENQASM 2.0; Parser"
+description = "A OPENQASM 2.0 Parser"
 
 [dependencies]
-lalrpop-util = "0.15.1"
-regex = "0.2.0"
-
-[build-dependencies]
-lalrpop = "0.15.1"
-
 [[bin]]
-name = "sample"
-path = "examples/sample.rs"
+name = "lex"
+path = "examples/lex_repl.rs"
