@@ -104,19 +104,18 @@ impl<'a> Lexer<'a> {
             Some(')') => Token::RParen,
             Some(']') => Token::RSParen,
             Some('}') => Token::RCParen,
-            Some('U') => Token::U,
-            Some(ch @ _) => {
+            Some(ch) => {
                 if is_letter(ch) {
                     let literal = self.read_identifier(ch);
                     token::lookup_ident(&literal)
                 } else if ch.is_numeric() {
                     let num_str = self.read_number(ch);
-                    return if num_str.contains(".") {
+                    if num_str.contains('.') {
                         let num = num_str.parse::<f32>().unwrap();
                         Token::Real(num)
                     } else {
-                       let num = num_str.parse::<i32>().unwrap();
-                       Token::NNInteger(num)
+                        let num = num_str.parse::<i32>().unwrap();
+                        Token::NNInteger(num)
                     }
                 } else {
                     Token::Illegal
@@ -125,6 +124,18 @@ impl<'a> Lexer<'a> {
 
             // EOF
             None => Token::EndOfFile,
+        }
+    }
+}
+
+impl<'a> Iterator for Lexer<'a> {
+    type Item = Token;
+    fn next(&mut self) -> Option<Token> {
+        let tok = self.next_token();
+        if tok == Token::EndOfFile {
+            None
+        } else {
+            Some(tok)
         }
     }
 }

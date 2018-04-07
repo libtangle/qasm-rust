@@ -1,4 +1,4 @@
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 pub enum Token {
     /// This token represents an illegal token.
     Illegal,
@@ -57,10 +57,6 @@ pub enum Token {
     Pi,
 
     // Built In Gates
-    /// Controlled Not Gate `CX`
-    CX,
-    /// Unitary Gate `U`
-    U,
 
     // Operators
     QReg,
@@ -99,7 +95,6 @@ pub fn lookup_ident(ident: &str) -> Token {
         "ln" => Token::Ln,
         "sqrt" => Token::Sqrt,
         "pi" => Token::Pi,
-        "CX" => Token::CX,
         "OPENQASM" => Token::OpenQASM,
         _ => Token::Id(ident.into()),
     }

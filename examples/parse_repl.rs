@@ -1,9 +1,8 @@
 extern crate qasm;
-use qasm::{lexer, process, token};
 
+use qasm::{lex, parse, process};
+use parse::parse;
 use std::io::{self, BufRead, Write};
-use token::Token;
-use lexer::Lexer;
 
 // Start a custom repl
 fn main() {
@@ -20,14 +19,8 @@ fn main() {
             .read_line(&mut line)
             .expect("Error reading from stdin");
         line = process(&line);
-        let mut lexer = Lexer::new(&line);
+        let mut tokens = lex(&line);
 
-        loop {
-            let tok = lexer.next_token();
-            println!("{:?}", tok);
-            if tok == Token::EndOfFile {
-                break;
-            }
-        }
+        println!("{:?}", parse(&mut tokens));
     }
 }

@@ -10,3 +10,11 @@ regex = "0.2"
 [[bin]]
 name = "lex"
 path = "examples/lex_repl.rs"
+
+[[bin]]
+name = "parse"
+path = "examples/parse_repl.rs"
+
+[[bin]]
+name = "main"
+path = "examples/main.rs"
