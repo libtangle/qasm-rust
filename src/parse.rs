@@ -35,6 +35,11 @@ pub enum AstNode {
     /// The seconds is the ids of the params.
     /// finally, a list of nodes, which the gate applies
     Gate(String, Vec<String>, Vec<String>, Vec<AstNode>),
+    /// Represents a conditional
+    /// String is classical register
+    /// i32 is the value to to check if equal.
+    /// If equal, AstNode is applied.
+    If(String, i32, Box<AstNode>),
 }
 
 #[derive(Debug, PartialEq)]
@@ -45,6 +50,49 @@ pub enum Argument {
     /// Represents a register argument.
     /// The string is the name of the register.
     Register(String),
+}
+
+fn parse_node(tokens: &mut Vec<Token>) -> Result<AstNode> {
+    match tokens.remove(0) {
+        Token::QReg => qreg(tokens),
+        Token::CReg => creg(tokens),
+        Token::Barrier => barrier(tokens),
+        Token::Reset => reset(tokens),
+        Token::Measure => measure(tokens),
+        Token::Id(i) => application(tokens, i),
+        Token::Opaque => opaque(tokens),
+        Token::Gate => gate(tokens),
+        Token::If => if_(tokens),
+
+        // These tokens shouldn't come up
+        Token::Illegal
+        | Token::OpenQASM
+        | Token::Semicolon
+        | Token::Comma
+        | Token::LParen
+        | Token::LCParen
+        | Token::LSParen
+        | Token::RCParen
+        | Token::RParen
+        | Token::Arrow
+        | Token::Real(_)
+        | Token::NNInteger(_)
+        | Token::Equals
+        | Token::Plus
+        | Token::Minus
+        | Token::Divide
+        | Token::Times
+        | Token::Power
+        | Token::Sin
+        | Token::Cos
+        | Token::Tan
+        | Token::Sqrt
+        | Token::Exp
+        | Token::Ln
+        | Token::Pi
+        | Token::RSParen => return Err(Error::SourceError),
+        _ => return Err(Error::SourceError),
+    }
 }
 
 pub fn parse(tokens: &mut Vec<Token>) -> Result<Vec<AstNode>> {
@@ -59,45 +107,7 @@ pub fn parse(tokens: &mut Vec<Token>) -> Result<Vec<AstNode>> {
     }
 
     while tokens.len() > 0 {
-        let node = match tokens.remove(0) {
-            Token::QReg => qreg(tokens)?,
-            Token::CReg => creg(tokens)?,
-            Token::Barrier => barrier(tokens)?,
-            Token::Reset => reset(tokens)?,
-            Token::Measure => measure(tokens)?,
-            Token::Id(i) => application(tokens, i)?,
-            Token::Opaque => opaque(tokens)?,
-            Token::Gate => gate(tokens)?,
-
-            // These tokens shouldn't come up
-            Token::Illegal
-            | Token::OpenQASM
-            | Token::Semicolon
-            | Token::Comma
-            | Token::LParen
-            | Token::LCParen
-            | Token::LSParen
-            | Token::RCParen
-            | Token::RParen
-            | Token::Arrow
-            | Token::Real(_)
-            | Token::NNInteger(_)
-            | Token::Equals
-            | Token::Plus
-            | Token::Minus
-            | Token::Divide
-            | Token::Times
-            | Token::Power
-            | Token::Sin
-            | Token::Cos
-            | Token::Tan
-            | Token::Sqrt
-            | Token::Exp
-            | Token::Ln
-            | Token::Pi
-            | Token::RSParen => return Err(Error::SourceError),
-            _ => return Err(Error::SourceError),
-        };
+        let node = parse_node(tokens)?;
         nodes.push(node);
     }
 
@@ -135,6 +145,17 @@ fn creg(tokens: &mut Vec<Token>) -> Result<AstNode> {
     match_semicolon(tokens)?;
 
     Ok(AstNode::CReg(identifier, num))
+}
+
+fn if_(tokens: &mut Vec<Token>) -> Result<AstNode> {
+    match_token(tokens, Token::LParen)?;
+    let id = match_identifier(tokens)?;
+    match_token(tokens, Token::Equals)?;
+    let val = match_nninteger(tokens)?;
+    match_token(tokens, Token::RParen)?;
+    let node = parse_node(tokens)?;
+
+    Ok(AstNode::If(id, val, Box::new(node)))
 }
 
 fn barrier(tokens: &mut Vec<Token>) -> Result<AstNode> {

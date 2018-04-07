@@ -17,6 +17,6 @@ fn main() {
         Err(e) => {
             println!("\x1b[31mGot an error: {}\x1b[0m", e);
             println!("{:?}", tokens)
-        },
+        }
     }
 }
