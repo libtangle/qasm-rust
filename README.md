@@ -6,6 +6,8 @@
 
 ## Features
 
+* Passes the official OpenQASM [conformance test](https://github.com/QISKit/openqasm/blob/master/contributing.md#tests) suite
+* As described in [the OpenQASM specification](https://arxiv.org/pdf/1707.03429.pdf)
 * Get tokens for a given source file
 * Resolve include statements
 * Remove comments
