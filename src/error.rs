@@ -1,5 +1,17 @@
 use std::fmt;
 
+/// Represents Errors that can occur during parsing.
+///
+/// The name of each corresponds to the type of error.
+/// This enum implements the display trait, thus there is
+/// nice outputs when printing:
+///
+/// ```rust
+/// extern crate qasm;
+///
+/// println!("Got an error: {}", qasm::Error::UnsupportedVersion);
+/// // "Got an error: Unsupported Version. Please Use OpenQASM Version 2.0"
+/// ```
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Error {
     MissingSemicolon,

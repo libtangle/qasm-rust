@@ -3,6 +3,13 @@ name = "qasm"
 version = "0.1.0"
 authors = ["Adam Kelly <adamkelly2201@gmail.com>"]
 description = "A OPENQASM 2.0 Parser"
+homepage = "https://github.com/qcgpu/qasm-rust"
+readme = "README.md"
+license = "MIT"
+
+[badges]
+travis-ci = { repository = "qcgpu/qasm-rust" branch = "master" }
+maintenance = { status = "actively-developed" }
 
 [dependencies]
 regex = "0.2"

@@ -1,6 +1,7 @@
+/// Tokens returned from lexing. Represents a small amount of the source code.
 #[derive(Debug, PartialEq, Clone)]
 pub enum Token {
-    /// This token represents an illegal token.
+    /// This token represents an illegal token. This is usually an error in the source code.
     Illegal,
     /// This token represents the end of a file.
     EndOfFile,
@@ -48,25 +49,41 @@ pub enum Token {
     Divide,
     /// Power Sign `^`
     Power,
+    /// Unary Sin function
     Sin,
+    /// Unary Cos function
     Cos,
+    /// Unary Tan function
     Tan,
+    /// Unary exp function (e^x)
     Exp,
+    /// Unary natural logarithm function
     Ln,
+    /// Unary square root function
     Sqrt,
+    /// Pi (3.1415....)
     Pi,
 
     // Built In Gates
 
     // Operators
+    /// Reserved word, `qreg`
     QReg,
+    /// Reserved word, `creg`
     CReg,
+    /// Reserved word, `barrier`
     Barrier,
+    /// Reserved word, `gate`
     Gate,
+    /// Reserved word, `measure`
     Measure,
+    /// Reserved word, `reset`
     Reset,
+    /// Reserved word, `include`
     Include,
+    /// Reserved word, `opaque`
     Opaque,
+    /// Reserved word, `if`
     If,
 }
 

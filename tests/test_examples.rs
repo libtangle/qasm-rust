@@ -1,9 +1,8 @@
-extern crate qasm;
 extern crate glob;
+extern crate qasm;
 
 use glob::glob;
 use qasm::{lex, parse, process};
-use parse::parse;
 use std::path::Path;
 use std::fs::File;
 use std::io::prelude::*;
@@ -17,7 +16,7 @@ fn test_parse(source: &str) {
             println!("Error: {}", e);
             println!("Source: {}", source);
             assert!(false)
-        },
+        }
     }
 }
 

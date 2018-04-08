@@ -1,7 +1,6 @@
 extern crate qasm;
 
 use qasm::{lex, parse, process};
-use parse::parse;
 use std::path::Path;
 
 // Start a custom repl
