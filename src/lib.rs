@@ -290,29 +290,28 @@ pub fn lex(input: &str) -> Vec<token::Token> {
 ///
 /// ```rust
 /// extern crate qasm;
-/// use qasm::Token;
 ///
 /// let mut tokens = vec![
-///     Token::OpenQASM,
-///     Token::Real(2.0),
-///     Token::Semicolon,
-///     Token::QReg,
-///     Token::Id("a".to_string()),
-///     Token::LSParen,
-///     Token::NNInteger(3),
-///     Token::RSParen,
-///     Token::Semicolon,
-///     Token::Id("CX".to_string()),
-///     Token::Id("a".to_string()),
-///     Token::LSParen,
-///     Token::NNInteger(0),
-///     Token::RSParen,
-///     Token::Comma,
-///     Token::Id("a".to_string()),
-///     Token::LSParen,
-///     Token::NNInteger(1),
-///     Token::RSParen,
-///     Token::Semicolon,
+///     qasm::Token::OpenQASM,
+///     qasm::Token::Real(2.0),
+///     qasm::Token::Semicolon,
+///     qasm::Token::QReg,
+///     qasm::Token::Id("a".to_string()),
+///     qasm::Token::LSParen,
+///     qasm::Token::NNInteger(3),
+///     qasm::Token::RSParen,
+///     qasm::Token::Semicolon,
+///     qasm::Token::Id("CX".to_string()),
+///     qasm::Token::Id("a".to_string()),
+///     qasm::Token::LSParen,
+///     qasm::Token::NNInteger(0),
+///     qasm::Token::RSParen,
+///     qasm::Token::Comma,
+///     qasm::Token::Id("a".to_string()),
+///     qasm::Token::LSParen,
+///     qasm::Token::NNInteger(1),
+///     qasm::Token::RSParen,
+///     qasm::Token::Semicolon,
 /// ];
 /// let ast = qasm::parse(&mut tokens);
 ///
