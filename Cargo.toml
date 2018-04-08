@@ -8,7 +8,7 @@ readme = "README.md"
 license = "MIT"
 
 [badges]
-travis-ci = { repository = "qcgpu/qasm-rust" branch = "master" }
+travis-ci = { repository = "qcgpu/qasm-rust", branch = "master" }
 maintenance = { status = "actively-developed" }
 
 [dependencies]
