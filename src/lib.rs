@@ -155,7 +155,7 @@
 //!
 //! ### Output
 //!
-//! ```no_run
+//! ```rust,ignore
 //! Ok([
 //!     Gate("h", ["a"], [], [ApplyGate("u2", [Register("a")], [" 0 ", " pi "])]),
 //!     QReg("q", 2),
