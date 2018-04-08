@@ -7,13 +7,8 @@ description = "A OPENQASM 2.0 Parser"
 [dependencies]
 regex = "0.2"
 
-[[bin]]
-name = "lex"
-path = "examples/lex_repl.rs"
-
-[[bin]]
-name = "parse"
-path = "examples/parse_repl.rs"
+[dev-dependencies]
+glob = "0.2"
 
 [[bin]]
 name = "main"

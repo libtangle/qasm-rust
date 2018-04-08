@@ -2,12 +2,15 @@ extern crate qasm;
 
 use qasm::{lex, parse, process};
 use parse::parse;
+use std::path::Path;
 
 // Start a custom repl
 fn main() {
     let input = include_str!("test.qasm");
-    let mut tokens = lex(&process(input));
-    println!("{:?}", tokens);
+    let cwd = Path::new(file!()).parent().unwrap();
+
+    let processed = process(input, cwd);
+    let mut tokens = lex(&processed);
 
     match parse(&mut tokens) {
         Ok(ast) => {

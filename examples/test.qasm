@@ -1,7 +1,5 @@
 OPENQASM 2.0;
 
-
-
 qreg q[3];
 qreg a[2];
 creg c[3];

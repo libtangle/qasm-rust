@@ -265,7 +265,7 @@ fn gate(tokens: &mut Vec<Token>) -> Result<AstNode> {
 
     match_token(tokens, Token::LCParen)?;
 
-    let applications = if tokens[0] != Token::LParen {
+    let applications = if tokens[0] != Token::RCParen {
         match_application_list(tokens)?
     } else {
         vec![]
@@ -405,7 +405,6 @@ fn match_mathexpr(tokens: &mut Vec<Token>) -> Result<String> {
         expr_string.push_str(" ");
     }
 
-    println!("{}", expr_string);
     Ok(expr_string)
 }
 
