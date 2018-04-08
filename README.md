@@ -1,6 +1,7 @@
 # QASM-rust
 
 [![Build Status](https://travis-ci.org/QCGPU/qasm-rust.svg?branch=master)](https://travis-ci.org/QCGPU/qasm-rust)
+[![crates icon](https://img.shields.io/crates/v/qasm.svg)](https://crates.io/crates/qasm)
 
 > An [OPENQASM 2.0](https://arxiv.org/pdf/1707.03429.pdf) parser written in Rust 🌵
 
