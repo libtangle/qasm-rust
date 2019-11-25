@@ -8,7 +8,7 @@ pub enum AstNode {
     /// The String is the identifier, and the integer is the number of qubits.
     QReg(String, i32),
     /// Represents the initialization of a Classical Register.
-    /// The String is the identifier, and the integer is the number of qubits.
+    /// The String is the identifier, and the integer is the number of bits.
     CReg(String, i32),
     /// Represents a barrier to a qubit / register
     Barrier(Argument),
