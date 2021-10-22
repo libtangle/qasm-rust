@@ -317,21 +317,7 @@ pub fn lex(input: &str) -> Vec<token::Token> {
 ///
 /// // Ok([QReg("a", 3), ApplyGate("CX", [Qubit("a", 0), Qubit("a", 1)], [])])
 /// ```
-pub fn parse(tokens: &mut Vec<token::Token>) -> Result<Vec<AstNode>> {
-    let mut nodes = vec![];
-
-    // Check that the version is first, and that it is version 2.0
-    if tokens.remove(0) != token::Token::OpenQASM {
-        return Err(Error::MissingVersion);
-    }
-    if parser::version(tokens)? != 2.0 {
-        return Err(Error::UnsupportedVersion);
-    }
-
-    while !tokens.is_empty() {
-        let node = parser::parse_node(tokens)?;
-        nodes.push(node);
-    }
-
-    Ok(nodes)
+pub fn parse(tokens: &Vec<token::Token>) -> Result<Vec<AstNode>> {
+    let mut tokens = tokens.iter().peekable();
+    parser::parse(&mut tokens)
 }

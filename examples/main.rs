@@ -5,13 +5,13 @@ use std::path::Path;
 
 // Start a custom repl
 fn main() {
-    let input = include_str!("test.qasm");
+    let input = include_str!("qft.qasm");
     let cwd = Path::new(file!()).parent().unwrap();
 
     let processed = process(input, cwd);
-    let mut tokens = lex(&processed);
+    let tokens = lex(&processed);
 
-    match parse(&mut tokens) {
+    match parse(&tokens) {
         Ok(ast) => {
             println!("AST: {:?}", ast);
             println!("\x1b[32mAll Okay!\x1b[0m");
